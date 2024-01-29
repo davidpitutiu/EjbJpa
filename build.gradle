@@ -8,9 +8,6 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-    maven {
-        url 'https://repository.jboss.org/nexus/content/groups/public-jboss'
-    }
 }
 
 ext {
@@ -28,8 +25,7 @@ dependencies {
     compileOnly('jakarta.platform:jakarta.jakartaee-api:9.1.0')
     compileOnly('jakarta.xml.ws:jakarta.xml.ws-api:3.0.1')
 
-    implementation 'jakarta.platform:jakarta.jakartaee-api:9.1.0' // Jakarta EE 9.1
-    implementation 'org.glassfish:jakarta.faces:3.0.0' // Jakarta Faces 3.0, versiunea corectă
+    implementation 'javax.servlet:jstl:1.2'
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")

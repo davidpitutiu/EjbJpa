@@ -1,31 +1,53 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://xmlns.jcp.org/jsf/html" prefix="h" %>
-<%@ taglib uri="http://xmlns.jcp.org/jsf/core" prefix="f" %>
-s
-<f:view>
-    <f:metadata>
-        <f:viewParam name="email" value="#{signupBean.email}" />
-        <f:viewParam name="password" value="#{signupBean.password}" />
-    </f:metadata>
-</f:view>
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sign Up Page</title>
+    <title>Sign Up</title>
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("cpassword").value;
+            var uppercaseRegex = /[A-Z]/;
+            var numberRegex = /[0-9]/;
+
+            if (password.length < 8) {
+                alert("Password must be at least 8 characters long.");
+                return false;
+            }
+
+            if (!uppercaseRegex.test(password)) {
+                alert("Password must contain at least one uppercase letter.");
+                return false;
+            }
+
+            if (!numberRegex.test(password)) {
+                alert("Password must contain at least one number.");
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </head>
 <body>
 <h1>Sign Up</h1>
-<h:form id="signupForm">
-    <h:outputLabel for="email">Email:</h:outputLabel>
-    <h:inputText id="email" value="#{signupBean.email}" required="true" />
-    <br/>
+<form action="signup" method="post" onsubmit="return validatePassword()">
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" required><br>
 
-    <h:outputLabel for="password">Password:</h:outputLabel>
-    <h:inputSecret id="password" value="#{signupBean.password}" required="true" />
-    <br/>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
 
-    <h:commandButton value="Sign Up" action="#{signupBean.register}" />
-</h:form>
+    <label for="cpassword">Confirm Password:</label>
+    <input type="password" id="cpassword" name="cpassword" required><br>
+
+    <input type="submit" value="Sign Up">
+</form>
+
+<p>Already have an account? <a href="index.jsp">Login</a></p>
 </body>
 </html>
